@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>seabird surf and coffee — Agoura Hills</title>
+<meta name="description" content="A surf shop and coffee bar coming to 28880 Roadside Drive, Agoura Hills. Boards, espresso, and the road to the beach.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="seabird surf and coffee">
+<meta property="og:description" content="A surf shop and coffee bar coming to Agoura Hills.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d3b45">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:image" content="https://seabirdsurfandcoffee.com/assets/og-image.png">
+<meta property="og:url" content="https://seabirdsurfandcoffee.com/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "seabird surf and coffee",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "28880 Roadside Drive",
+    "addressLocality": "Agoura Hills",
+    "addressRegion": "CA",
+    "postalCode": "91301",
+    "addressCountry": "US"
+  }
+}
+</script>
+
+<style>
+/* ---------------------------------------------------------------
+   Seabird Surf and Coffee — holding page
+   One file. No frameworks, no trackers, no network calls.
+   Everything you are likely to want to change lives in CONFIG,
+   inside the <script> tag at the bottom of this file.
+   --------------------------------------------------------------- */
+
+:root{
+  --ink:        #10262b;   /* body text            */
+  --ink-soft:   #4a656b;   /* secondary text       */
+  --deep:       #0d3b45;   /* deep water           */
+  --sea:        #1c6b74;   /* mid water            */
+  --foam:       #7fc6c2;   /* highlight            */
+  --sand:       #f4efe6;   /* page ground          */
+  --sand-warm:  #e8dfd0;   /* card / divider       */
+  --rule:       #d6cab6;
+  --max:        60rem;
+}
+
+*{box-sizing:border-box}
+/* A class-based display rule out-ranks the browser's own handling of the
+   hidden attribute, so say it explicitly or hidden elements still show. */
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--sand);
+  color:var(--ink);
+  font:400 clamp(16px,1.05vw + 13px,18px)/1.65 ui-serif, "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+h2,.eyebrow,.btn,.meta dt{
+  font-family:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+a{color:var(--sea)}
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:2px solid var(--sea);outline-offset:3px;border-radius:2px;
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:linear-gradient(180deg,#0a2f38 0%,var(--deep) 45%,var(--sea) 100%);
+  color:#fff;
+  padding:clamp(3.5rem,10vw,7rem) 1.5rem clamp(9rem,16vw,11rem);
+  text-align:center;
+  overflow:hidden;
+}
+.hero-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:2}
+
+/* The logo sits at the very top of the hero. Drop the real mark into
+   assets/seabird-mark.png and it replaces the drawn gull automatically. */
+.mark{margin:0 0 1.9rem}
+.mark img{
+  display:block;margin:0 auto;
+  width:clamp(122px,19vw,182px);height:auto;
+  /* The Albatross-family marks are black line art and the hero is dark,
+     so flip them to white. If you ever supply a white version of the
+     file, delete this one line. */
+  filter:invert(1);
+}
+.bird{
+  display:block;width:clamp(56px,9vw,88px);height:auto;margin:0 auto;
+  opacity:.9;
+}
+
+.eyebrow{
+  margin:0 0 1.1rem;
+  font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--foam);
+}
+/* The albatross wordmark is lowercase, widely tracked and serif.
+   This is the same lockup so the two brands read as a set: the big
+   word, then the smaller category line tucked under its right edge. */
+h1{
+  display:inline-block;
+  margin:0;
+  text-align:left;      /* the sub-line hangs right INSIDE this box */
+  font-weight:400;
+}
+.wordmark-main{
+  display:block;
+  font-size:clamp(2.3rem,9vw,4.9rem);
+  letter-spacing:.16em;
+  text-indent:.16em;    /* cancels the trailing track so it sits centred */
+  line-height:1;
+}
+.wordmark-sub{
+  display:block;
+  margin-top:.45em;
+  text-align:right;
+  font-size:clamp(.72rem,2.1vw,1.15rem);
+  letter-spacing:.3em;
+  text-indent:.3em;
+  color:var(--foam);
+}
+
+.lede{
+  max-width:34rem;margin:1.5rem auto 0;
+  font-size:clamp(1.05rem,1.4vw + .7rem,1.3rem);
+  line-height:1.55;
+  color:#dff0ee;
+}
+
+/* the horizon line the hero sits on */
+.waves{
+  position:absolute;left:0;right:0;bottom:-1px;width:100%;
+  height:clamp(70px,11vw,130px);display:block;z-index:1;
+}
+
+/* ---------- body ---------- */
+main{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:clamp(2.5rem,6vw,4rem) 1.5rem clamp(3rem,7vw,5rem);
+}
+
+.cols{
+  display:grid;gap:clamp(1.75rem,4vw,3rem);
+  grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  margin:0 0 clamp(2.5rem,6vw,3.5rem);
+}
+.col h2{
+  margin:0 0 .5rem;
+  font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sea);
+}
+.col p{margin:0;color:var(--ink-soft)}
+
+hr{border:0;border-top:1px solid var(--rule);margin:0 0 clamp(2.5rem,6vw,3.5rem)}
+
+/* ---------- signup ---------- */
+.signup{
+  background:var(--sand-warm);
+  border-radius:14px;
+  padding:clamp(1.6rem,4vw,2.4rem);
+  text-align:center;
+}
+.sibling{
+  margin-top:clamp(2.5rem,6vw,3.5rem);
+  padding-top:clamp(2rem,5vw,2.75rem);
+  border-top:1px solid var(--rule);
+  text-align:center;
+}
+.sibling-eyebrow{
+  margin:0;
+  font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.sibling-link{display:inline-block;margin:1rem 0 .9rem;line-height:0}
+.sibling-link img{
+  width:clamp(148px,26vw,215px);height:auto;display:block;
+  opacity:.85;transition:opacity .15s ease;
+}
+.sibling-link:hover img,.sibling-link:focus-visible img{opacity:1}
+.sibling-note{margin:0;font-size:.9rem;color:var(--ink-soft)}
+
+.signup h2{
+  margin:0 0 .4rem;font-size:clamp(1.25rem,2vw + .6rem,1.6rem);font-weight:600;
+  letter-spacing:-.01em;color:var(--deep);
+}
+.signup p{margin:0 auto 1.4rem;max-width:30rem;color:var(--ink-soft);font-size:.98rem}
+
+form{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;max-width:28rem;margin:0 auto}
+input[type=email]{
+  flex:1 1 14rem;min-width:0;
+  padding:.8rem 1rem;
+  font:inherit;font-size:1rem;
+  color:var(--ink);background:#fff;
+  border:1px solid var(--rule);border-radius:9px;
+}
+.btn{
+  display:inline-block;
+  padding:.8rem 1.5rem;
+  font-size:.95rem;font-weight:600;
+  color:#fff;background:var(--deep);
+  border:1px solid var(--deep);border-radius:9px;
+  cursor:pointer;text-decoration:none;
+  transition:background .15s ease;
+}
+.btn:hover{background:var(--sea)}
+.note{margin:1rem 0 0;font-size:.85rem;color:var(--ink-soft)}
+
+/* ---------- footer / details ---------- */
+footer{
+  border-top:1px solid var(--rule);
+  background:var(--sand);
+}
+.foot-inner{
+  max-width:var(--max);margin:0 auto;
+  padding:clamp(2rem,5vw,3rem) 1.5rem;
+}
+.meta{
+  display:grid;gap:1.5rem 2.5rem;
+  grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+  margin:0 0 2rem;
+}
+.meta dt{
+  margin:0 0 .3rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sea);
+}
+.meta dd{margin:0;color:var(--ink)}
+.meta dd a{text-decoration:none;border-bottom:1px solid var(--foam)}
+.meta dd a:hover{border-bottom-color:var(--sea)}
+.colophon{
+  margin:0;padding-top:1.5rem;border-top:1px solid var(--rule);
+  font-size:.82rem;color:var(--ink-soft);
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero-inner > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+  .hero-inner > :nth-child(2){animation-delay:.06s}
+  .hero-inner > :nth-child(3){animation-delay:.12s}
+  .hero-inner > :nth-child(4){animation-delay:.18s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+
+@media print{
+  .hero{background:none;color:#000;padding:2rem 0}
+  .waves,.bird,.signup{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+
+    <!-- ==============================================================
+         LOGO. Save the mark as assets/seabird-mark.png and it appears
+         here on its own — no other change needed. Until that file
+         exists the drawn gull below stands in for it.
+         ============================================================== -->
+    <div class="mark">
+      <img id="mark-img" src="assets/seabird-mark.png" alt="seabird" hidden>
+      <svg id="mark-fallback" class="bird" viewBox="0 0 120 64" fill="none" aria-hidden="true">
+        <path d="M4 40C22 40 38 30 52 16c3-3 7-3 9 0 14 14 30 24 48 24" stroke="#7fc6c2" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M30 47c12-2 22-8 30-17 8 9 18 15 30 17" stroke="#7fc6c2" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
+      </svg>
+    </div>
+
+    <h1>
+      <span class="wordmark-main">seabird</span>
+      <span class="wordmark-sub">surf &amp; coffee</span>
+    </h1>
+    <p class="lede">
+      A surf shop and an espresso bar under one roof, on the road out
+      to the coast. Opening on Roadside Drive.
+    </p>
+  </div>
+
+  <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 64c120-26 240-26 360 0s240 26 360 0 240-26 360 0 240 26 360 0v56H0z" fill="#f4efe6"/>
+  </svg>
+</header>
+
+<main>
+
+  <div class="cols">
+    <section class="col">
+      <h2>The shop</h2>
+      <p>Boards, fins, wax, leashes and the rest of it — picked by people who
+         actually paddle out, for the run down Kanan and Malibu Canyon.</p>
+    </section>
+    <section class="col">
+      <h2>The bar</h2>
+      <p>Espresso, pour-over and cold brew, plus pastries in the morning.
+         Built for the drive: everything to go, nothing to wait around for.</p>
+    </section>
+    <section class="col">
+      <h2>Opening</h2>
+      <p id="opening">We're deep in the build-out now. Leave your email
+         and you'll hear from us the week the doors open.</p>
+    </section>
+  </div>
+
+  <hr>
+
+  <section class="signup" id="signup">
+    <h2>Know when we open</h2>
+    <p>One email when we open, and the occasional note about a swell,
+       a new shaper or a bag of something good. Nothing else, ever.</p>
+
+    <div id="signup-slot"><!-- filled in by the script below --></div>
+
+    <p class="note">We'll never share your address with anyone.</p>
+  </section>
+
+  <!-- ==================================================================
+       PLACEHOLDER — the link across to Albatross.
+       Three things to change here and nowhere else:
+         the href (twice), the logo file, and the line of text.
+       To use the brush "A" mark instead of the wordmark, drop the file
+       into assets/ and change the src below to match its filename.
+       ================================================================== -->
+  <section class="sibling">
+    <p class="sibling-eyebrow">From the people behind</p>
+
+    <a class="sibling-link" href="https://albatrosssurfboards.com"
+       target="_blank" rel="noopener">
+      <img src="assets/albatross-logo.png" alt="albatross surfboards"
+           width="474" height="153" loading="lazy">
+    </a>
+
+    <p class="sibling-note">
+      Boards by <a href="https://albatrosssurfboards.com" target="_blank"
+      rel="noopener">albatross surfboards</a>.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <dl class="meta">
+      <div>
+        <dt>Find us</dt>
+        <dd>
+          <a href="https://maps.google.com/?q=28880+Roadside+Drive,+Agoura+Hills,+CA+91301"
+             target="_blank" rel="noopener">28880 Roadside Drive<br>Agoura Hills, CA 91301</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Get in touch</dt>
+        <dd id="contact-slot"></dd>
+      </div>
+      <div>
+        <dt>Follow along</dt>
+        <dd id="social-slot"></dd>
+      </div>
+    </dl>
+    <p class="colophon">&copy; <span id="year"></span> seabird surf and coffee.</p>
+  </div>
+</footer>
+
+<script>
+/* =================================================================
+   CONFIG — the only part of this file you should need to touch.
+   Fill a value in, save, and re-publish. Leave a value as an empty
+   string ("") and that piece simply doesn't appear on the page.
+   ================================================================= */
+const CONFIG = {
+
+  // Where "Get in touch" points. Until the Google Workspace mailbox
+  // exists, this is the one thing on the page that is a placeholder.
+  contactEmail: "",              // e.g. "hello@seabirdsurf.com"
+
+  // Instagram handle, without the @. Leave "" to hide the row.
+  instagram:    "",              // e.g. "seabirdsurfcoffee"
+
+  // Email signup. Leave formAction "" and the page shows a plain
+  // "email us" button instead — which works today, with no setup.
+  // To use a Google Form: create the form, click Send > <>, and copy
+  // the two values out of the embed code.
+  //   formAction: ".../formResponse"   (the <form action> URL)
+  //   formField:  "entry.1234567890"   (the email question's name)
+  formAction:   "",
+  formField:    "",
+};
+
+/* --- nothing below here needs editing ---------------------------- */
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Use the real logo if assets/seabird-mark.png exists; keep the drawn
+// gull if it doesn't. Either way the page never shows a broken image.
+(function () {
+  const img = document.getElementById("mark-img");
+  const gull = document.getElementById("mark-fallback");
+  if (!img || !gull) return;
+  // Set the attribute, don't assign the .hidden property: `hidden` is an
+  // HTMLElement property and the gull is an <svg>, which doesn't have it.
+  // Assigning it there silently does nothing.
+  const show = (el, on) =>
+    on ? el.removeAttribute("hidden") : el.setAttribute("hidden", "");
+  const settle = () => {
+    const ok = img.complete && img.naturalWidth > 0;
+    show(img, ok);
+    show(gull, !ok);
+  };
+  img.addEventListener("load", settle);
+  img.addEventListener("error", settle);
+  settle();
+})();
+
+const esc = s => String(s).replace(/[&<>"]/g, c =>
+  ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+
+// Contact row
+const contact = document.getElementById("contact-slot");
+contact.innerHTML = CONFIG.contactEmail
+  ? `<a href="mailto:${esc(CONFIG.contactEmail)}">${esc(CONFIG.contactEmail)}</a>`
+  : `<span style="color:var(--ink-soft)">Email coming soon</span>`;
+
+// Instagram row
+const social = document.getElementById("social-slot");
+social.closest("div").hidden = !CONFIG.instagram;
+if (CONFIG.instagram) {
+  social.innerHTML =
+    `<a href="https://instagram.com/${esc(CONFIG.instagram)}" target="_blank"
+        rel="noopener">@${esc(CONFIG.instagram)}</a>`;
+}
+
+// Signup: a real form once a Google Form is wired up, otherwise a
+// mailto button — so the page is never a dead end.
+const slot = document.getElementById("signup-slot");
+
+if (CONFIG.formAction && CONFIG.formField) {
+  slot.innerHTML = `
+    <form action="${esc(CONFIG.formAction)}" method="POST" target="seabird-sink">
+      <label for="email" class="sr-only" style="position:absolute;left:-9999px">Email address</label>
+      <input id="email" type="email" name="${esc(CONFIG.formField)}"
+             placeholder="you@example.com" required autocomplete="email">
+      <button class="btn" type="submit">Keep me posted</button>
+    </form>
+    <iframe name="seabird-sink" style="display:none" title="form target"></iframe>`;
+
+  const form = slot.querySelector("form");
+  form.addEventListener("submit", () => {
+    setTimeout(() => {
+      slot.innerHTML =
+        `<p style="margin:0;font-size:1.05rem;color:var(--deep)">
+           Thanks — we'll be in touch.</p>`;
+    }, 300);
+  });
+
+} else if (CONFIG.contactEmail) {
+  slot.innerHTML =
+    `<a class="btn" href="mailto:${esc(CONFIG.contactEmail)}?subject=${
+       encodeURIComponent("Tell me when Seabird opens")}">Email us to be added</a>`;
+
+} else {
+  slot.innerHTML =
+    `<p style="margin:0;color:var(--ink-soft)">Signup opens shortly.</p>`;
+}
+</script>
+
+</body>
+</html>
