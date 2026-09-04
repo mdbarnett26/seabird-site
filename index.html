@@ -65,9 +65,8 @@ body{
   color:var(--ink);
   font:400 clamp(16px,1.05vw + 13px,18px)/1.65 ui-serif, "Iowan Old Style", Georgia, "Times New Roman", serif;
 }
-h2,.eyebrow,.btn,.meta dt{
-  font-family:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
-}
+/* One typeface throughout. The small labels are set apart by size,
+   letter-spacing and colour instead of by a second font or capitals. */
 a{color:var(--sea)}
 a:focus-visible,button:focus-visible,input:focus-visible{
   outline:2px solid var(--sea);outline-offset:3px;border-radius:2px;
@@ -103,7 +102,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 
 .eyebrow{
   margin:0 0 1.1rem;
-  font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  font-size:.82rem;font-weight:600;letter-spacing:.1em;font-style:italic;
   color:var(--foam);
 }
 /* The albatross wordmark is lowercase, widely tracked and serif.
@@ -159,7 +158,7 @@ main{
 }
 .col h2{
   margin:0 0 .5rem;
-  font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  font-size:.92rem;font-weight:600;letter-spacing:.02em;
   color:var(--sea);
 }
 .col p{margin:0;color:var(--ink-soft)}
@@ -181,15 +180,17 @@ hr{border:0;border-top:1px solid var(--rule);margin:0 0 clamp(2.5rem,6vw,3.5rem)
 }
 .sibling-eyebrow{
   margin:0;
-  font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  font-size:.9rem;font-weight:400;letter-spacing:.02em;font-style:italic;
   color:var(--ink-soft);
 }
-.sibling-link{display:inline-block;margin:1rem 0 .9rem;line-height:0}
-.sibling-link img{
-  width:clamp(148px,26vw,215px);height:auto;display:block;
+.sibling-link{
+  display:inline-block;margin:1.1rem 0 .9rem;line-height:0;
   opacity:.85;transition:opacity .15s ease;
 }
-.sibling-link:hover img,.sibling-link:focus-visible img{opacity:1}
+.sibling-link:hover,.sibling-link:focus-visible{opacity:1}
+/* the brush A stacked above the wordmark, both centred on the same axis */
+.sibling-a{width:clamp(60px,9.5vw,80px);height:auto;display:block;margin:0 auto .75rem}
+.sibling-wordmark{width:clamp(148px,26vw,215px);height:auto;display:block}
 .sibling-note{margin:0;font-size:.9rem;color:var(--ink-soft)}
 
 .signup h2{
@@ -234,7 +235,7 @@ footer{
 }
 .meta dt{
   margin:0 0 .3rem;
-  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  font-size:.9rem;font-weight:600;letter-spacing:.02em;
   color:var(--sea);
 }
 .meta dd{margin:0;color:var(--ink)}
@@ -336,8 +337,10 @@ footer{
 
     <a class="sibling-link" href="https://albatrosssurfboards.com"
        target="_blank" rel="noopener">
-      <img src="assets/albatross-logo.png" alt="albatross surfboards"
-           width="474" height="153" loading="lazy">
+      <img class="sibling-a" src="assets/albatross-a.png" alt=""
+           width="366" height="292" loading="lazy">
+      <img class="sibling-wordmark" src="assets/albatross-logo.png"
+           alt="albatross surfboards" width="474" height="153" loading="lazy">
     </a>
 
     <p class="sibling-note">
