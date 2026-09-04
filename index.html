@@ -11,7 +11,7 @@
 <meta property="og:description" content="A surf shop and coffee bar coming to Agoura Hills.">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d3b45">
+<meta name="theme-color" content="#33261f">
 
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -43,14 +43,14 @@
    --------------------------------------------------------------- */
 
 :root{
-  --ink:        #10262b;   /* body text            */
-  --ink-soft:   #4a656b;   /* secondary text       */
-  --deep:       #0d3b45;   /* deep water           */
-  --sea:        #1c6b74;   /* mid water            */
-  --foam:       #7fc6c2;   /* highlight            */
-  --sand:       #f4efe6;   /* page ground          */
-  --sand-warm:  #e8dfd0;   /* card / divider       */
-  --rule:       #d6cab6;
+  --ink:        #2e2018;   /* body text — warm dark brown   */
+  --ink-soft:   #6d5a4c;   /* secondary text                */
+  --deep:       #33261f;   /* espresso, the hero ground     */
+  --sea:        #9a6742;   /* warm mid tone / links         */
+  --foam:       #e2b78c;   /* highlight — caramel           */
+  --sand:       #faf5ec;   /* page ground — warm cream      */
+  --sand-warm:  #f0e6d6;   /* card / divider                */
+  --rule:       #ddd0bb;
   --max:        60rem;
 }
 
@@ -63,7 +63,8 @@ body{
   margin:0;
   background:var(--sand);
   color:var(--ink);
-  font:400 clamp(16px,1.05vw + 13px,18px)/1.65 ui-serif, "Iowan Old Style", Georgia, "Times New Roman", serif;
+  /* a touch larger and more open — reads relaxed rather than clipped */
+  font:400 clamp(16.5px,1.1vw + 13px,19px)/1.78 ui-serif, "Iowan Old Style", Georgia, "Times New Roman", serif;
 }
 /* One typeface throughout. The small labels are set apart by size,
    letter-spacing and colour instead of by a second font or capitals. */
@@ -75,7 +76,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* ---------- hero ---------- */
 .hero{
   position:relative;
-  background:linear-gradient(180deg,#0a2f38 0%,var(--deep) 45%,var(--sea) 100%);
+  background:
+    radial-gradient(120% 85% at 50% 8%, #55402f 0%, rgba(85,64,47,0) 62%),
+    linear-gradient(180deg,#241a15 0%, var(--deep) 55%, #4a362a 100%);
   color:#fff;
   padding:clamp(3.5rem,10vw,7rem) 1.5rem clamp(9rem,16vw,11rem);
   text-align:center;
@@ -135,7 +138,7 @@ h1{
   max-width:34rem;margin:1.5rem auto 0;
   font-size:clamp(1.05rem,1.4vw + .7rem,1.3rem);
   line-height:1.55;
-  color:#dff0ee;
+  color:#f0dcc6;
 }
 
 /* the horizon line the hero sits on */
@@ -145,6 +148,38 @@ h1{
 }
 
 /* ---------- body ---------- */
+/* ---------- the rack ----------
+   Boards stand on one floor line. Each image's CSS height is a fraction
+   (--f) of the row height, NOT of its own natural size — that keeps the
+   longboard-to-fish proportions correct at every screen width. */
+.rack{
+  padding:clamp(2.2rem,6vw,3.6rem) 1rem clamp(1.6rem,4vw,2.4rem);
+  overflow:hidden;
+}
+.rack-row{
+  --rack-h:clamp(190px,30vw,430px);
+  height:var(--rack-h);
+  display:flex;
+  align-items:flex-end;          /* all boards rest on the same line */
+  justify-content:center;
+  gap:clamp(.45rem,1.8vw,1.5rem);
+}
+.rack-row img{
+  height:calc(100% * var(--f,1));
+  width:auto;
+  display:block;
+  filter:drop-shadow(0 14px 16px rgba(46,32,24,.14));
+}
+.rack-rail{
+  max-width:var(--max);
+  margin:0 auto;
+  border-top:1px solid var(--rule);
+}
+/* eight boards on a phone is eight slivers — show five */
+@media (max-width:720px){
+  .rack-row img:nth-child(n+6){display:none}
+}
+
 main{
   max-width:var(--max);
   margin:0 auto;
@@ -152,10 +187,22 @@ main{
 }
 
 .cols{
-  display:grid;gap:clamp(1.75rem,4vw,3rem);
-  grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
-  margin:0 0 clamp(2.5rem,6vw,3.5rem);
+  display:grid;gap:clamp(1.9rem,5vw,3.4rem);
+  grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));
+  margin:0 0 clamp(2.2rem,5vw,3rem);
 }
+.col p{max-width:34em}          /* keeps a long line readable */
+
+/* "Opening" is short and doesn't belong beside two essays */
+.opening-note{
+  max-width:33rem;
+  margin:0 auto clamp(2.5rem,6vw,3.5rem);
+  padding-top:clamp(1.6rem,4vw,2.2rem);
+  border-top:1px solid var(--rule);
+  text-align:center;
+}
+.opening-note h2{margin-bottom:.45rem}
+.opening-note p{margin:0;color:var(--ink-soft)}
 .col h2{
   margin:0 0 .5rem;
   font-size:.92rem;font-weight:600;letter-spacing:.02em;
@@ -166,9 +213,21 @@ main{
 hr{border:0;border-top:1px solid var(--rule);margin:0 0 clamp(2.5rem,6vw,3.5rem)}
 
 /* ---------- signup ---------- */
+/* the one photograph — soft-cornered rather than full bleed, which
+   suits the room feeling better than an edge-to-edge banner */
+.feature{margin:0 0 clamp(2.5rem,6vw,3.5rem)}
+.feature img{
+  width:100%;height:auto;display:block;
+  border-radius:22px;
+  box-shadow:0 18px 34px rgba(46,32,24,.13);
+}
+.feature figcaption{
+  margin:.9rem .2rem 0;font-size:.86rem;font-style:italic;color:var(--ink-soft);
+}
+
 .signup{
   background:var(--sand-warm);
-  border-radius:14px;
+  border-radius:22px;
   padding:clamp(1.6rem,4vw,2.4rem);
   text-align:center;
 }
@@ -283,46 +342,64 @@ footer{
       <span class="wordmark-sub">surf &amp; coffee</span>
     </h1>
     <p class="lede">
-      A surf shop and an espresso bar under one roof, on the road out
-      to the coast. Opening at Whizin Market Square.
+      <!--w:tagline-->A surf shop &amp; coffee bar under one roof, on the road out to the coast. Opening at Whizin Market Square, Fall 2026.<!--/w-->
     </p>
   </div>
 
   <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 64c120-26 240-26 360 0s240 26 360 0 240-26 360 0 240 26 360 0v56H0z" fill="#f4efe6"/>
+    <path d="M0 64c120-26 240-26 360 0s240 26 360 0 240-26 360 0 240 26 360 0v56H0z" fill="#faf5ec"/>
   </svg>
 </header>
+
+<section class="rack">
+  <div class="rack-row">
+      <img src="assets/boards/mustard-fish.webp" alt="" style="--f:.80" decoding="async" fetchpriority="high">
+      <img src="assets/boards/blue-log.webp" alt="" style="--f:1" decoding="async">
+      <img src="assets/boards/oxblood-egg.webp" alt="" style="--f:.86" decoding="async">
+      <img src="assets/boards/magenta-fish.webp" alt="" style="--f:.78" decoding="async">
+      <img src="assets/boards/smoke-log.webp" alt="" style="--f:.98" decoding="async">
+      <img src="assets/boards/cream-fish.webp" alt="" style="--f:.80" decoding="async">
+      <img src="assets/boards/navy-rail.webp" alt="" style="--f:.92" decoding="async">
+      <img src="assets/boards/blue-marble.webp" alt="" style="--f:.88" decoding="async">
+  </div>
+</section>
+<div class="rack-rail"></div>
 
 <main>
 
   <div class="cols">
     <section class="col">
-      <h2>The shop</h2>
-      <p>Boards, fins, wax, leashes and the rest of it — picked by people who
-         actually paddle out, for the run down Kanan and Malibu Canyon.</p>
+      <h2><!--w:shop-title-->Surf<!--/w--></h2>
+      <p><!--w:shop-text-->At the center of our surf shop is Albatross Surfboards, hand-shaped in Malibu Canyon by Jon Monroy. Around Jon’s boards, we bring together a constantly changing collection from independent shapers—some local, some from around the world, but all chosen for the quality of their craft and the way they surf. It’s less about carrying every board and more about finding the right ones: handmade, interesting and a little harder to find.<!--/w--></p>
     </section>
     <section class="col">
-      <h2>The bar</h2>
-      <p>Espresso, pour-over and cold brew, plus pastries in the morning.
-         Built for the drive: everything to go, nothing to wait around for.</p>
-    </section>
-    <section class="col">
-      <h2>Opening</h2>
-      <p id="opening">We're deep in the build-out now. Leave your email
-         and you'll hear from us the week the doors open.</p>
+      <h2><!--w:bar-title-->Coffee<!--/w--></h2>
+      <p><!--w:bar-text-->Coffee is at the heart of it — a simple, well-made cup in a place you actually want to spend some time. We source quality coffee from roasters we believe in and keep the menu focused on the things we think matter: great beans, thoughtful preparation and consistency. Whether you’re grabbing one on the way out or settling into a chair for an hour, the goal is the same: really good coffee without making it complicated.<!--/w--></p>
     </section>
   </div>
+
+  <section class="opening-note">
+    <h2><!--w:opening-title-->Opening<!--/w--></h2>
+    <p id="opening"><!--w:opening-text-->We're deep in the build-out now. Leave your email and you'll hear from us the week the doors open.<!--/w--></p>
+  </section>
+
+  <figure class="feature">
+    <img src="assets/cup-wide.webp"
+         srcset="assets/cup-wide-small.webp 900w, assets/cup-wide.webp 1536w"
+         sizes="(max-width: 60rem) 100vw, 60rem"
+         width="1536" height="1024" decoding="async"
+         alt="A cappuccino in a seabird cup on a wooden table, hills at sunset beyond">
+  </figure>
 
   <hr>
 
   <section class="signup" id="signup">
-    <h2>Know when we open</h2>
-    <p>One email when we open, and the occasional note about a swell,
-       a new shaper or a bag of something good. Nothing else, ever.</p>
+    <h2><!--w:signup-title-->Know when we open<!--/w--></h2>
+    <p><!--w:signup-text-->One email when we open, and the occasional note about a swell, a new shaper or a bag of something good. Nothing else, ever.<!--/w--></p>
 
     <div id="signup-slot"><!-- filled in by the script below --></div>
 
-    <p class="note">We'll never share your address with anyone.</p>
+    <p class="note"><!--w:signup-note-->We'll never share your address with anyone.<!--/w--></p>
   </section>
 
   <!-- ==================================================================
@@ -333,7 +410,7 @@ footer{
        into assets/ and change the src below to match its filename.
        ================================================================== -->
   <section class="sibling">
-    <p class="sibling-eyebrow">From the people behind</p>
+    <p class="sibling-eyebrow"><!--w:albatross-lead-in-->From the people behind<!--/w--></p>
 
     <a class="sibling-link" href="https://albatrosssurfboards.com"
        target="_blank" rel="noopener">
@@ -344,8 +421,7 @@ footer{
     </a>
 
     <p class="sibling-note">
-      Boards by <a href="https://albatrosssurfboards.com" target="_blank"
-      rel="noopener">albatross surfboards</a>.
+      <!--w:albatross-note-->Boards by <a href="https://albatrosssurfboards.com" target="_blank" rel="noopener">albatross surfboards</a>.<!--/w-->
     </p>
   </section>
 
@@ -355,14 +431,14 @@ footer{
   <div class="foot-inner">
     <dl class="meta">
       <div>
-        <dt>Find us</dt>
+        <dt><!--w:find-title-->Find us<!--/w--></dt>
         <dd>
           <a href="https://maps.google.com/?q=28880+Roadside+Drive,+Agoura+Hills,+CA+91301"
              target="_blank" rel="noopener">Whizin Market Square<br>28880 Roadside Drive<br>Agoura Hills, CA 91301</a>
         </dd>
       </div>
       <div>
-        <dt>Get in touch</dt>
+        <dt><!--w:contact-title-->Get in touch<!--/w--></dt>
         <dd id="contact-slot"></dd>
       </div>
       <div>
